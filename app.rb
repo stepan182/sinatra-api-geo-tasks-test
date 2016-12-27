@@ -1,6 +1,6 @@
 require 'sinatra'
 require 'mongoid'
-require_relative 'lib/helpers'
+require_relative 'lib/api_helpers'
 
 helpers ApiHelpers
 
