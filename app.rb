@@ -1,13 +1,17 @@
 require 'sinatra'
 require 'mongoid'
+require_relative 'lib/helpers'
+
+helpers ApiHelpers
 
 # DB Setup
 Mongoid.load! "mongoid.yml"
 
 before do
   content_type :json
+  authenticate!
 end
 
 get "/api" do
-  "Test".to_json
+  "ok".to_json
 end
