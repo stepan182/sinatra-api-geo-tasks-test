@@ -74,7 +74,9 @@ patch "/api/tasks/:id" do |id|
   driver_only_permissions("Only drivers can change task status!")
 
   mode = params[:mode]
-  halt 403, { message: "You need to provide operation mode e.g. ?mode=pick or ?mode=finish" }.to_json if mode.blank?
+  if mode.blank? and (mode != "pick" or mode != "finish")
+    halt 403, { message: "You need to provide a valid operation mode e.g. ?mode=pick or ?mode=finish" }.to_json
+  end
 
   begin
     status = TaskStatus.find_by("tasks._id": BSON::ObjectId(id))
